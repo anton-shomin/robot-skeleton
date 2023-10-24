@@ -13,6 +13,8 @@
             - `db_tests.robot`
         - `__init__.robot`
         - `e_commerce_tests.robot`
+    - `Data/`
+          - `InputData.robot`    
     - `Resources/`
         - `API/`
             - `__init__.robot`
