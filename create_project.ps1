@@ -1,3 +1,25 @@
+# Ensure pip is installed
+$pythonInstalled = Get-Command python -ErrorAction SilentlyContinue
+if (-not $pythonInstalled) {
+    Write-Error "Python is not installed or not added to PATH. Please install Python and make sure it's added to PATH."
+    return
+}
+
+$pipInstalled = Get-Command pip -ErrorAction SilentlyContinue
+if (-not $pipInstalled) {
+    Write-Host "Installing pip..."
+    Invoke-WebRequest "https://bootstrap.pypa.io/get-pip.py" -OutFile get-pip.py
+    python get-pip.py
+    Remove-Item get-pip.py
+}
+
+# Install robotframework and necessary libraries
+Write-Host "Installing Robot Framework..."
+pip install robotframework
+
+Write-Host "Installing SeleniumLibrary for Robot Framework..."
+pip install robotframework-seleniumlibrary
+
 # Create project directory
 New-Item -ItemType Directory -Path project\Keywords -Force
 New-Item -ItemType Directory -Path project\Tests -Force

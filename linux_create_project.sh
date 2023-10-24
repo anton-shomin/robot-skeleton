@@ -1,5 +1,28 @@
 #!/bin/bash
 
+# Check if python3 is installed
+if ! command -v python3 &> /dev/null
+then
+    echo "Python3 is not installed. Please install Python3 and try again."
+    exit 1
+fi
+
+# Check if pip3 is installed
+if ! command -v pip3 &> /dev/null
+then
+    echo "pip3 is not installed. Installing pip3..."
+    sudo apt update
+    sudo apt install -y python3-pip
+fi
+
+# Install robotframework and necessary libraries
+echo "Installing Robot Framework..."
+pip3 install robotframework
+
+echo "Installing SeleniumLibrary for Robot Framework..."
+pip3 install robotframework-seleniumlibrary
+
+
 # Create project directory
 mkdir -p project/Keywords project/Tests project/Resources
 

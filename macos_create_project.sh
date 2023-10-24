@@ -1,5 +1,33 @@
 #!/bin/bash
 
+# Check if python3 is installed
+if ! command -v python3 &> /dev/null
+then
+    echo "Python3 is not installed. Installing Python3..."
+    # Check if Homebrew is installed
+    if ! command -v brew &> /dev/null
+    then
+        echo "Homebrew is not installed. Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+    brew install python3
+fi
+
+# Check if pip3 is installed
+if ! command -v pip3 &> /dev/null
+then
+    echo "pip3 is not installed. Something is wrong with the Python3 installation."
+    exit 1
+fi
+
+# Install robotframework and necessary libraries
+echo "Installing Robot Framework..."
+pip3 install robotframework
+
+echo "Installing SeleniumLibrary for Robot Framework..."
+pip3 install robotframework-seleniumlibrary
+
+
 # Create project directory
 mkdir -p project/Keywords project/Tests project/Resources
 
